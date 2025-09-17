@@ -66,14 +66,10 @@ def create_floor_view(floor_name, floor_path, floor_icon, rooms):
                             },
                             "domain": "cover",
                             "area": room_area,
-                            "sort": {
-                                "method": "friendly_name",
-                                "reverse": True,
-                            },
                         }
                     ]
                 },
-                "sort": {"method": "friendly_name"},
+                "sort": {"method": "friendly_name", "reverse": True},
                 "show_empty": False,
             }
         )
@@ -120,6 +116,13 @@ def create_floor_view(floor_name, floor_path, floor_icon, rooms):
 
 
 def dashboard():
+    # Define rooms for the 1F floor
+    first_floor_rooms = [
+        {"name": "Den", "area": "den", "icon": "mdi:armchair"},
+        {"name": "Garage", "area": "garage", "icon": "mdi:garage"},
+        {"name": "Front Porch", "area": "front_porch", "icon": "mdi:home-outline"},
+    ]
+
     # Define rooms for the 2F floor
     second_floor_rooms = [
         {"name": "Hall", "area": "second_floor_hall", "icon": "mdi:door"},
@@ -131,21 +134,22 @@ def dashboard():
         {"name": "Office Bathroom", "area": "office_bathroom", "icon": "mdi:toilet"},
     ]
 
+    # Define rooms for the 3F floor
+    third_floor_rooms = [
+        {"name": "Hall", "area": "third_floor_hall", "icon": "mdi:door"},
+        {"name": "Laundry Room", "area": "laundry_room", "icon": "mdi:washing-machine"},
+        {"name": "Master Bedroom", "area": "master_bedroom", "icon": "mdi:bed-king"},
+        {"name": "Master Bathroom", "area": "master_bathroom", "icon": "mdi:shower"},
+        {"name": "Master Closet", "area": "master_closet", "icon": "mdi:wardrobe"},
+        {"name": "Guest Bedroom", "area": "guest_bedroom", "icon": "mdi:bed"},
+        {"name": "Guest Bathroom", "area": "guest_bathroom", "icon": "mdi:toilet"},
+    ]
+
     return {
         "views": [
-            {
-                "title": "Home",
-                "type": "sections",
-                "max_columns": 4,
-                "icon": "mdi:home",
-                "sections": [
-                    {
-                        "type": "grid",
-                        "cards": [{"type": "heading", "heading": "New section"}],
-                    }
-                ],
-            },
+            create_floor_view("1F", "1f", "mdi:home-floor-1", first_floor_rooms),
             create_floor_view("2F", "2f", "mdi:home-floor-2", second_floor_rooms),
+            create_floor_view("3F", "3f", "mdi:home-floor-3", third_floor_rooms),
         ]
     }
 
