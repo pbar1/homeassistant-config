@@ -147,6 +147,46 @@ def dashboard():
 
     return {
         "views": [
+            {
+                "title": "Home",
+                "type": "sections",
+                "max_columns": 4,
+                "icon": "mdi:home",
+                "sections": [
+                    {
+                        "type": "grid",
+                        "cards": [
+                            {
+                                "type": "heading",
+                                "heading": "Thermostats",
+                                "icon": "mdi:thermostat",
+                                "badges": [],
+                            },
+                            {
+                                "type": "custom:auto-entities",
+                                "card": {"type": "grid", "columns": 2, "square": False},
+                                "card_param": "cards",
+                                "filter": {
+                                    "include": [
+                                        {
+                                            "domain": "climate",
+                                            "options": {
+                                                "type": "custom:bubble-card",
+                                                "card_type": "button",
+                                                "button_type": "state",
+                                                "show_last_changed": True,
+                                                "show_state": True,
+                                            },
+                                        }
+                                    ]
+                                },
+                                "sort": {"method": "friendly_name"},
+                                "show_empty": False,
+                            },
+                        ],
+                    }
+                ],
+            },
             create_floor_view("1F", "1f", "mdi:home-floor-1", first_floor_rooms),
             create_floor_view("2F", "2f", "mdi:home-floor-2", second_floor_rooms),
             create_floor_view("3F", "3f", "mdi:home-floor-3", third_floor_rooms),
